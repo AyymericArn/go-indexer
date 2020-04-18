@@ -10,8 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// ecrireCmd represents the ecrire command
-var ecrireCmd = &cobra.Command{
+// indexCmd represents the ecrire command
+var indexCmd = &cobra.Command{
 	Use:   "index",
 	Short: "Launches indexation in given folder.",
 	Long: `Launches indexation in given folder.
@@ -46,5 +46,5 @@ var ecrireCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(ecrireCmd)
+	rootCmd.AddCommand(indexCmd)
 }
