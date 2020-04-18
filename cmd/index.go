@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"search/engine"
-	"unicode/utf8"
 
 	"github.com/spf13/cobra"
 )
@@ -15,7 +15,7 @@ var ecrireCmd = &cobra.Command{
 	Use:   "index",
 	Short: "Launches indexation in given folder.",
 	Long: `Launches indexation in given folder.
-	you may provide relative path with the ./ syntax (.. is not supported yet)`,
+	you may provide relative path or absolute path`,
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) != 1 {
 			log.Fatal("not enough arguments")
@@ -23,18 +23,9 @@ var ecrireCmd = &cobra.Command{
 
 		fmt.Printf("Walking %v", args[0])
 
-		dir := args[0]
-
-		// if is absolute path, turn it into absolute
-		// only works for ./
-		if string(dir[0]) == "." {
-			_, i := utf8.DecodeRuneInString(dir)
-			dir = dir[i:]
-			mydir, err := os.Getwd()
-			if err != nil {
-				fmt.Println(err)
-			}
-			dir = mydir + dir
+		dir, err := filepath.Abs(args[0])
+		if err != nil {
+			log.Fatal("error converting relative path")
 		}
 
 		// path exists ?

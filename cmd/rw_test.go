@@ -8,6 +8,8 @@ import (
 
 func TestReadWrite(t *testing.T) {
 	c, err := engine.Dial()
+	defer c.Close()
+
 	if err != nil {
 		fmt.Println("failed at dial")
 		t.Fail()
@@ -26,8 +28,13 @@ func TestReadWrite(t *testing.T) {
 	}
 
 	res, err := engine.Get(c, "grenouille")
-	if err != nil || len(res) != 1 || res[0] != "/test/grenouille" {
+	if err != nil {
 		fmt.Println(err)
+		t.Fail()
+	}
+
+	if len(res) != 1 || res[0] != "/test/grenouille" {
+		fmt.Println("engine.Get failed")
 		t.Fail()
 	}
 }

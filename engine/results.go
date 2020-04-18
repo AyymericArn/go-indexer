@@ -10,6 +10,7 @@ import (
 	"text/tabwriter"
 )
 
+// ShowResults : gives results of a search in a formatted table
 func ShowResults(w io.Writer, key string, hits []string) {
 
 	tw := new(tabwriter.Writer)

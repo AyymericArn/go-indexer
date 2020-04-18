@@ -21,6 +21,8 @@ var queryCmd = &cobra.Command{
 		var key string = args[0]
 
 		c, err := engine.Dial()
+		defer c.Close()
+
 		if err != nil {
 			log.Fatal("error with redis connection")
 		}
