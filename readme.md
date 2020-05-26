@@ -1,6 +1,6 @@
 # Go Indexing Engine
 
-Little exercise for go lesson.
+Little exercise for go lesson, consisting of a command line tool able to scan a local directory, read its file contents, and index them by their words in Redis. It also provides commands to retrieve the indexing results. Made with spf13's Cobra.
 
 ## Demo
 
